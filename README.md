@@ -4,7 +4,7 @@ Dotbot is an extensible bot framework built using .NET Core.
 
 ## Example
 
-### 1. Adding the bot entry point
+### 1. Add the bot entry point
 
 Create a new .NET Core console application and reference `Dotbot.Slack` and/or `Dotbot.Gitter`.  
 Add this code in your `Program.cs` and press F5.
@@ -47,7 +47,7 @@ namespace Dotbot.Example
 As you notice, it doesn't do anything yet. That's because there isn't any 
 parts associated with our bot.
 
-## 2. Writing an adding new part
+## 2. Write and add a new part
 
 Start by creating a new class called `PingPart`.
 
