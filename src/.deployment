@@ -1,0 +1,2 @@
+[config]
+command = powershell -NoProfile -NoLogo -ExecutionPolicy Unrestricted -Command "& "$pwd\Build.ps1 -Target Kudu" 2>&1 | echo"

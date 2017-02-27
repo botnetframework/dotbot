@@ -1,0 +1,5 @@
+{
+    "is_in_place": false,
+    "is_singleton": true,
+    "stopping_wait_time": 60
+}
