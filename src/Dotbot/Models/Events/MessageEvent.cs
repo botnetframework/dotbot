@@ -11,10 +11,5 @@
         {
             Broker = broker;
         }
-
-        public void Accept(IEventDispatcher dispatcher)
-        {
-            dispatcher.Visit(this);
-        }
     }
 }

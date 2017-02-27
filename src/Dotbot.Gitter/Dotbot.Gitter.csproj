@@ -12,6 +12,9 @@
     <PackageProjectUrl>https://github.com/botnetcore/dotbot</PackageProjectUrl>
     <RepositoryType>https://github.com/botnetcore/dotbot</RepositoryType>
   </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
+    <LangVersion>7</LangVersion>
+  </PropertyGroup>
   <ItemGroup>
     <PackageReference Include="Bayeux" Version="0.1.0-preview0003" />
   </ItemGroup>

@@ -24,7 +24,7 @@ namespace Dotbot.Example
                 .UseGitter(configuration["Gitter:Token"])
                 .UseSlack(configuration["Slack:Token"])
                 .AddPart<PingPart>()
-                .UseSerilogConsole(LogEventLevel.Debug)
+                .UseSerilogConsole(LogEventLevel.Verbose)
                 .Build();
 
             // Start the robot.

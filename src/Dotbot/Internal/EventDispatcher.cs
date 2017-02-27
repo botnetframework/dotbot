@@ -19,7 +19,20 @@ namespace Dotbot.Internal
             _lock = new object();
         }
 
-        public void Visit(MessageEvent @event)
+        public void Dispatch(IEvent @event)
+        {
+            switch (@event)
+            {
+                case MessageEvent message:
+                    VisitMessage(message);
+                    break;
+                case HelpEvent help:
+                    VisitHelp(help);
+                    break;
+            }
+        }
+
+        private void VisitMessage(MessageEvent @event)
         {
             lock (_lock)
             {
@@ -35,7 +48,7 @@ namespace Dotbot.Internal
             }
         }
 
-        internal void Visit(HelpEvent @event)
+        private void VisitHelp(HelpEvent @event)
         {
             lock (_lock)
             {

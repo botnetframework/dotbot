@@ -4,19 +4,19 @@ namespace Dotbot.Internal.Parts
 {
     internal sealed class HelpCommand : CommandPart
     {
-        private readonly MessageQueue _messageQueue;
+        private readonly EventQueue _eventQueue;
 
         public override string Help => "Displays all of the help commands that I know about.";
 
-        public HelpCommand(MessageQueue messageQueue)
+        public HelpCommand(EventQueue eventQueue)
             : base(new [] { "help" })
         {
-            _messageQueue = messageQueue;
+            _eventQueue = eventQueue;
         }
 
         protected override void HandleCommand(ReplyContext context, string[] args)
         {
-            _messageQueue.Enqueue(new HelpEvent(context));
+            _eventQueue.Enqueue(new HelpEvent(context));
         }
     }
 }

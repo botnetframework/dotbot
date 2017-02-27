@@ -2,6 +2,5 @@
 {
     public interface IEvent
     {
-        void Accept(IEventDispatcher dispatcher);
     }
 }

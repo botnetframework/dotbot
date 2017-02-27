@@ -12,6 +12,9 @@
     <PackageProjectUrl>https://github.com/botnetcore/dotbot</PackageProjectUrl>
     <RepositoryUrl>https://github.com/botnetcore/dotbot</RepositoryUrl>
   </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
+    <LangVersion>7</LangVersion>
+  </PropertyGroup>
   <ItemGroup>
     <PackageReference Include="System.Net.WebSockets.Client" Version="4.3.0" />
   </ItemGroup>

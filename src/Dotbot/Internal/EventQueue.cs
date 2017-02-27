@@ -3,11 +3,11 @@ using System.Threading;
 
 namespace Dotbot.Internal
 {
-    internal sealed class MessageQueue : IMessageQueue
+    internal sealed class EventQueue : IMessageQueue
     {
         private readonly BlockingCollection<IEvent> _queue;
 
-        public MessageQueue()
+        public EventQueue()
         {
             _queue = new BlockingCollection<IEvent>(new ConcurrentQueue<IEvent>());
         }

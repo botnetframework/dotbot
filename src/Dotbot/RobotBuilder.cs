@@ -31,7 +31,7 @@ namespace Dotbot
             services.AddSingleton<RobotPart, HelpCommand>();
 
             // Message queue
-            var inbox = new MessageQueue();
+            var inbox = new EventQueue();
             services.AddSingleton<IMessageQueue>(inbox);
             services.AddSingleton(inbox);
 
@@ -40,7 +40,7 @@ namespace Dotbot
 
             // Robot
             services.AddSingleton<IRobot, Robot>();
-            services.AddSingleton<IWorker, MessageRouter>();
+            services.AddSingleton<IWorker, EventRouter>();
             services.AddSingleton<EventDispatcher>();
             services.AddSingleton<IEventDispatcher>(provider => provider.GetService<EventDispatcher>());
         }

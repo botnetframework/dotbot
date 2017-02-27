@@ -1,9 +1,7 @@
-﻿using Dotbot.Models.Events;
-
-namespace Dotbot
+﻿namespace Dotbot
 {
     public interface IEventDispatcher
     {
-        void Visit(MessageEvent @event);
+        void Dispatch(IEvent @event);
     }
 }
