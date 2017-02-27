@@ -8,6 +8,9 @@ var projects = new DirectoryPath[] {
     "./src/Dotbot", "./src/Dotbot.Slack", "./src/Dotbot.Gitter"
 };
 
+var isRunningOnAppVeyor = BuildSystem.AppVeyor.IsRunningOnAppVeyor;
+var isPullRequest = BuildSystem.AppVeyor.Environment.PullRequest.IsPullRequest;
+
 Setup(context => 
 {
     // Calculate semantic version.
@@ -15,6 +18,7 @@ Setup(context =>
 
     // Output some information.
     Information("Version: {0}", version.GetSemanticVersion());
+    Information("Pull Request: {0}", isPullRequest);
 });
 
 Task("Clean")
@@ -70,18 +74,10 @@ Task("Pack")
 });
 
 Task("Publish")
-    .WithCriteria(c => c.BuildSystem().AppVeyor.IsRunningOnAppVeyor)
+    .WithCriteria(isRunningOnAppVeyor && !isPullRequest)
     .IsDependentOn("Pack")
     .Does(() =>
 {
-    var branch = BuildSystem.AppVeyor.Environment.Repository.Branch ?? "";
-    if(!branch.Equals("master", StringComparison.OrdinalIgnoreCase) &&
-       !branch.Equals("develop", StringComparison.OrdinalIgnoreCase))
-    {
-        Information("Skipping publish since not on publishable branch.");
-        return;
-    }
-
     var apiKey = EnvironmentVariable("DOTBOT_NUGET_API_KEY");
     if(string.IsNullOrWhiteSpace(apiKey))
     {
