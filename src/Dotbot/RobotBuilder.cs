@@ -23,26 +23,28 @@ namespace Dotbot
 
         private static void ConfigureDefaultRegistrations(IServiceCollection services)
         {
-            // Tamperer
+            // Brain
             services.AddSingleton<Brain>();
             services.AddSingleton<IBrainProvider, InMemoryBrain>();
 
-            // Parts
+            // Built in parts
             services.AddSingleton<RobotPart, HelpCommand>();
 
-            // Message queue
+            // Event queue
             var inbox = new EventQueue();
             services.AddSingleton<IEventQueue>(inbox);
             services.AddSingleton(inbox);
 
-            // Logging
-            services.AddSingleton<ILog, DefaultLog>();
-
-            // Robot
-            services.AddSingleton<IRobot, Robot>();
+            // Event routing and dispatching
             services.AddSingleton<IWorker, EventRouter>();
             services.AddSingleton<EventDispatcher>();
             services.AddSingleton<IEventDispatcher>(provider => provider.GetService<EventDispatcher>());
+
+            // Logging
+            services.AddSingleton<ILog, ConsoleLog>();
+
+            // Robot
+            services.AddSingleton<IRobot, Robot>();
         }
     }
 }
