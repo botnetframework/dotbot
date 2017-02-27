@@ -40,7 +40,6 @@ namespace Dotbot
 
             // Robot
             services.AddSingleton<IRobot, Robot>();
-            services.AddSingleton<IWorker, WebJobShutdownListener>();
             services.AddSingleton<IWorker, MessageRouter>();
             services.AddSingleton<EventDispatcher>();
             services.AddSingleton<IEventDispatcher>(provider => provider.GetService<EventDispatcher>());
