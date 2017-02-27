@@ -2,12 +2,15 @@
   <PropertyGroup>
     <TargetFramework>netstandard1.6</TargetFramework>
     <AssemblyName>Dotbot.Gitter</AssemblyName>
-    <PackageId>CakeTron.Gitter</PackageId>
+    <PackageId>Dotbot.Gitter</PackageId>
     <NetStandardImplicitPackageVersion>1.6.1</NetStandardImplicitPackageVersion>
     <PackageTargetFallback>$(PackageTargetFallback);dnxcore50</PackageTargetFallback>
     <GenerateAssemblyConfigurationAttribute>false</GenerateAssemblyConfigurationAttribute>
     <GenerateAssemblyCompanyAttribute>false</GenerateAssemblyCompanyAttribute>
     <GenerateAssemblyProductAttribute>false</GenerateAssemblyProductAttribute>
+    <PackageLicenseUrl>https://opensource.org/licenses/MIT</PackageLicenseUrl>
+    <PackageProjectUrl>https://github.com/botnetcore/dotbot</PackageProjectUrl>
+    <RepositoryType>https://github.com/botnetcore/dotbot</RepositoryType>
   </PropertyGroup>
   <ItemGroup>
     <PackageReference Include="Bayeux" Version="0.1.0-preview0003" />
