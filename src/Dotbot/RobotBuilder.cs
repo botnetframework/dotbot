@@ -32,7 +32,7 @@ namespace Dotbot
 
             // Message queue
             var inbox = new EventQueue();
-            services.AddSingleton<IMessageQueue>(inbox);
+            services.AddSingleton<IEventQueue>(inbox);
             services.AddSingleton(inbox);
 
             // Logging

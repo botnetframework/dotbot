@@ -17,7 +17,7 @@ namespace Dotbot.Slack
     internal sealed class SlackAdapter : IAdapter, IWorker
     {
         private readonly SlackBroker _broker;
-        private readonly IMessageQueue _messageQueue;
+        private readonly IEventQueue _eventQueue;
         private readonly ILog _log;
         private readonly JsonSerializer _serializer;
         private readonly SlackRoomCache _rooms;
@@ -26,10 +26,10 @@ namespace Dotbot.Slack
         public string FriendlyName => "Slack adapter";
         public IBroker Broker => _broker;
 
-        public SlackAdapter(SlackBroker broker, IMessageQueue messageQueue, ILog log)
+        public SlackAdapter(SlackBroker broker, IEventQueue eventQueue, ILog log)
         {
             _broker = broker;
-            _messageQueue = messageQueue;
+            _eventQueue = eventQueue;
             _log = new LogNameDecorator("Slack", log);
             _serializer = new JsonSerializer();
             _rooms = new SlackRoomCache();
@@ -163,7 +163,7 @@ namespace Dotbot.Slack
                 var text = handshake.Users.Aggregate(message.Text,
                     (m, u) => Regex.Replace(m, $"<@{u.Id}>", $"@{u.Name}"));
 
-                _messageQueue.Enqueue(new MessageEvent(_broker)
+                _eventQueue.Enqueue(new MessageEvent(_broker)
                 {
                     Bot = bot,
                     Message = new Message { Text = text, User = user },

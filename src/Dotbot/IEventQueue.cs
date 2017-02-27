@@ -1,6 +1,6 @@
 ﻿namespace Dotbot
 {
-    public interface IMessageQueue
+    public interface IEventQueue
     {
         void Enqueue(IEvent @event);
     }

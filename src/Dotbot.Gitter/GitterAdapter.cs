@@ -14,16 +14,16 @@ namespace Dotbot.Gitter
     {
         private readonly GitterBroker _broker;
         private readonly BayeuxClient _bayeux;
-        private readonly IMessageQueue _messageQueue;
+        private readonly IEventQueue _eventQueue;
         private readonly ILog _log;
 
         public string FriendlyName => "Gitter adapter";
         public IBroker Broker => _broker;
 
-        public GitterAdapter(GitterBroker broker, GitterConfiguration configuration, IMessageQueue messageQueue, ILog log)
+        public GitterAdapter(GitterBroker broker, GitterConfiguration configuration, IEventQueue eventQueue, ILog log)
         {
             _broker = broker;
-            _messageQueue = messageQueue;
+            _eventQueue = eventQueue;
             _log = new LogNameDecorator("Gitter", log);
 
             // Create the Bayeux client.
@@ -104,7 +104,7 @@ namespace Dotbot.Gitter
             };
 
             // Enqueue the message.
-            _messageQueue.Enqueue(new MessageEvent(_broker)
+            _eventQueue.Enqueue(new MessageEvent(_broker)
             {
                 Bot = user,
                 Room = room,
