@@ -1,6 +1,6 @@
-﻿using Dotbot.Domain;
+﻿using Dotbot.Models;
 
-namespace Dotbot.Contexts
+namespace Dotbot
 {
     public abstract class RobotContext
     {

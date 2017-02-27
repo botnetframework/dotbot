@@ -6,8 +6,8 @@ using System.Net.Http.Headers;
 using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
-using Dotbot.Domain;
 using Dotbot.Gitter.Models;
+using Dotbot.Models;
 using Newtonsoft.Json;
 
 namespace Dotbot.Gitter

@@ -1,5 +1,5 @@
 ﻿using System.Threading.Tasks;
-using Dotbot.Domain;
+using Dotbot.Models;
 
 namespace Dotbot
 {

@@ -7,8 +7,8 @@ using System.Text.RegularExpressions;
 using System.Threading;
 using System.Threading.Tasks;
 using Dotbot.Diagnostics;
-using Dotbot.Domain;
-using Dotbot.Events;
+using Dotbot.Models;
+using Dotbot.Models.Events;
 using Dotbot.Slack.Models;
 using Newtonsoft.Json;
 
@@ -30,7 +30,7 @@ namespace Dotbot.Slack
         {
             _broker = broker;
             _messageQueue = messageQueue;
-            _log = new AdapterLog("Slack", log);
+            _log = new LogNameDecorator("Slack", log);
             _serializer = new JsonSerializer();
             _rooms = new SlackRoomCache();
             _users = new SlackUserCache();

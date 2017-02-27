@@ -1,8 +1,7 @@
 ﻿using System;
 using System.Text.RegularExpressions;
-using Dotbot.Contexts;
 
-namespace Dotbot.Utilities
+namespace Dotbot
 {
     public abstract class MentionablePart : RobotPart
     {
@@ -13,7 +12,7 @@ namespace Dotbot.Utilities
             _regex = new Regex("^(?<to>[a-z@\\d](?:[a-z\\d]|-(?=[a-z\\d])){0,38}) (?<message>.*)", RegexOptions.Compiled | RegexOptions.IgnoreCase);
         }
 
-        public sealed override bool Handle(MessageContext context)
+        public sealed override bool Handle(ReplyContext context)
         {
             var match = _regex.Match(context.Message.Text);
             if (match.Success)
@@ -30,6 +29,6 @@ namespace Dotbot.Utilities
             return false;
         }
 
-        protected abstract bool HandleMention(MessageContext context, string message);
+        protected abstract bool HandleMention(ReplyContext context, string message);
     }
 }

@@ -1,4 +1,4 @@
-﻿using Dotbot.Events;
+﻿using Dotbot.Models.Events;
 
 namespace Dotbot
 {

@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.Net.Http;
 using System.Threading.Tasks;
-using Dotbot.Domain;
+using Dotbot.Models;
 using Dotbot.Slack.Models;
 using Newtonsoft.Json;
 

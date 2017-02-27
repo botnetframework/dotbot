@@ -2,9 +2,8 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text.RegularExpressions;
-using Dotbot.Contexts;
 
-namespace Dotbot.Utilities
+namespace Dotbot
 {
     public abstract class CommandPart : MentionablePart
     {
@@ -24,7 +23,7 @@ namespace Dotbot.Utilities
             }
         }
 
-        protected sealed override bool HandleMention(MessageContext context, string message)
+        protected sealed override bool HandleMention(ReplyContext context, string message)
         {
             foreach (var regex in _regexes)
             {
@@ -41,6 +40,6 @@ namespace Dotbot.Utilities
             return false;
         }
 
-        protected abstract void HandleCommand(MessageContext context, string[] args);
+        protected abstract void HandleCommand(ReplyContext context, string[] args);
     }
 }

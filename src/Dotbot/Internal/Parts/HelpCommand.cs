@@ -1,6 +1,4 @@
-﻿using Dotbot.Contexts;
-using Dotbot.Events;
-using Dotbot.Utilities;
+﻿using Dotbot.Models.Events;
 
 namespace Dotbot.Internal.Parts
 {
@@ -16,7 +14,7 @@ namespace Dotbot.Internal.Parts
             _messageQueue = messageQueue;
         }
 
-        protected override void HandleCommand(MessageContext context, string[] args)
+        protected override void HandleCommand(ReplyContext context, string[] args)
         {
             _messageQueue.Enqueue(new HelpEvent(context));
         }

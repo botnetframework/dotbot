@@ -1,5 +1,5 @@
 ﻿using System.Diagnostics;
-using Dotbot.Domain;
+using Dotbot.Models;
 
 namespace Dotbot.Gitter.Models
 {

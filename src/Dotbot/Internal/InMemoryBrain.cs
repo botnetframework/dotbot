@@ -2,7 +2,7 @@
 using Dotbot.Diagnostics;
 using Newtonsoft.Json;
 
-namespace Dotbot
+namespace Dotbot.Internal
 {
     internal sealed class InMemoryBrain : IBrainProvider
     {

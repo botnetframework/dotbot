@@ -1,8 +1,6 @@
-﻿using Dotbot.Contexts;
-using Dotbot.Domain;
-using Dotbot.Internal;
+﻿using Dotbot.Internal;
 
-namespace Dotbot.Events
+namespace Dotbot.Models.Events
 {
     internal sealed class HelpEvent : IEvent
     {

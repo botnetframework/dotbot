@@ -1,7 +1,4 @@
-﻿using Dotbot.Contexts;
-using Dotbot.Utilities;
-
-namespace Dotbot.Example.Parts
+﻿namespace Dotbot.Example.Parts
 {
     public sealed class PingPart : CommandPart
     {
@@ -12,7 +9,7 @@ namespace Dotbot.Example.Parts
         {
         }
 
-        protected override void HandleCommand(MessageContext context, string[] args)
+        protected override void HandleCommand(ReplyContext context, string[] args)
         {
             context.Broadcast("Pong!");
         }

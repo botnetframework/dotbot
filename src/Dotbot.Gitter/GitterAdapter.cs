@@ -3,9 +3,9 @@ using System.Threading;
 using System.Threading.Tasks;
 using Bayeux;
 using Dotbot.Diagnostics;
-using Dotbot.Domain;
-using Dotbot.Events;
 using Dotbot.Gitter.Models;
+using Dotbot.Models;
+using Dotbot.Models.Events;
 using Newtonsoft.Json.Linq;
 
 namespace Dotbot.Gitter
@@ -24,7 +24,7 @@ namespace Dotbot.Gitter
         {
             _broker = broker;
             _messageQueue = messageQueue;
-            _log = new AdapterLog("Gitter", log);
+            _log = new LogNameDecorator("Gitter", log);
 
             // Create the Bayeux client.
             var settings = new BayeuxClientSettings(new Uri("https://ws.gitter.im/faye"));

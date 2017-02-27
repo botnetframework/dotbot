@@ -1,4 +1,4 @@
-﻿namespace Dotbot.Domain
+﻿namespace Dotbot.Models
 {
     public sealed class User
     {

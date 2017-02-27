@@ -1,12 +1,12 @@
-﻿using Dotbot.Domain;
+﻿using Dotbot.Models;
 
-namespace Dotbot.Contexts
+namespace Dotbot
 {
-    public sealed class MessageContext : RoomContext
+    public sealed class ReplyContext : RoomContext
     {
         public Message Message { get; }
 
-        public MessageContext(IBroker broker, User bot, Room room, Message message)
+        public ReplyContext(IBroker broker, User bot, Room room, Message message)
             : base(broker, bot, room)
         {
             Message = message;

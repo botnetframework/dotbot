@@ -1,6 +1,4 @@
-﻿using Dotbot.Domain;
-
-namespace Dotbot.Events
+﻿namespace Dotbot.Models.Events
 {
     public sealed class MessageEvent : IEvent
     {

@@ -1,5 +1,5 @@
 ﻿using System.Collections.Concurrent;
-using Dotbot.Domain;
+using Dotbot.Models;
 using Dotbot.Slack.Models;
 
 namespace Dotbot.Slack

@@ -1,10 +1,8 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-using Dotbot.Contexts;
 using Dotbot.Diagnostics;
-using Dotbot.Events;
-using Dotbot.Utilities;
+using Dotbot.Models.Events;
 
 namespace Dotbot.Internal
 {
@@ -25,7 +23,7 @@ namespace Dotbot.Internal
         {
             lock (_lock)
             {
-                var context = new MessageContext(@event.Broker, @event.Bot, @event.Room, @event.Message);
+                var context = new ReplyContext(@event.Broker, @event.Bot, @event.Room, @event.Message);
                 foreach (var part in _parts)
                 {
                     if (part.Handle(context))
