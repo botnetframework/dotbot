@@ -90,10 +90,8 @@ Task("Publish")
 
     // Get the file paths.
     var packageVersion = version.GetSemanticVersion();
-    var files = GetFiles("./.artifacts/*." + packageVersion + ".nupkg") 
-        + GetFiles("./.artifacts/*." + packageVersion + ".symbols.nupkg");
+    var files = GetFiles("./.artifacts/*." + packageVersion + ".nupkg");
 
-    // Push files
     foreach(var file in files) 
     {
         NuGetPush(file, new NuGetPushSettings() {
