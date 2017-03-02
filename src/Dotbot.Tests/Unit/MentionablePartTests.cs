@@ -37,6 +37,24 @@ namespace Dotbot.Tests.Unit
                 // Then
                 Assert.False(result);
             }
+
+            [Theory]
+            [InlineData("bot_user")]
+            [InlineData("bot-user")]
+            [InlineData("botuser#01")]
+            public void Should_Handle_Mention_For_Usernames_With_Special_Characters(string botName)
+            {
+                // Given
+                var sut = new FakeMentionablePart();
+                var fixture = new ReplyContextFixture { Text = $"@{botName} hello world!" };
+                fixture.Bot.Username = botName;
+
+                // When
+                var result = sut.Handle(fixture.Create());
+
+                // Then
+                Assert.True(result);
+            }
         }
     }
 }
