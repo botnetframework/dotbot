@@ -1,4 +1,5 @@
 #load "./scripts/version.cake"
+#tool "nuget:?package=xunit.runner.console&version=2.2.0"
 
 var target = Argument<string>("target", "Default");
 var config = Argument<string>("configuration", "Release");
@@ -43,7 +44,6 @@ Task("Build")
     .IsDependentOn("Restore")
     .Does(() =>
 {
-    // Build
     DotNetCoreBuild("./src/Dotbot.sln", new DotNetCoreBuildSettings 
     {
         Configuration = config,
@@ -51,11 +51,17 @@ Task("Build")
     });
 });
 
-Task("Pack")
+Task("Run-Tests")
     .IsDependentOn("Build")
     .Does(() =>
 {
-    // Publish
+    DotNetCoreTest("./src/Dotbot.Tests/Dotbot.Tests.csproj");
+});
+
+Task("Pack")
+    .IsDependentOn("Run-Tests")
+    .Does(() =>
+{
     foreach(var project in projects)
     {
         Information("\nPacking {0}...", project.FullPath);
