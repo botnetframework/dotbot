@@ -21,23 +21,23 @@ namespace Dotbot.Slack
             // Add channels
             foreach (var channel in handshake.Channels)
             {
-                var room = new Room { Id = channel.Id, Name = channel.Name };
+                var room = new Room(channel.Id, channel.Name);
                 _dictionary.AddOrUpdate(channel.Id, room, (k, v) =>
-                    new Room { Id = k, Name = v.Name });
+                    new Room(k, v.Name));
             }
 
             // Add groups
             foreach (var group in handshake.Groups)
             {
-                var room = new Room { Id = group.Id, Name = group.Name };
+                var room = new Room(group.Id, group.Name);
                 _dictionary.AddOrUpdate(group.Id, room, (k, v) =>
-                    new Room { Id = k, Name = v.Name });
+                    new Room(k, v.Name));
             }
         }
 
         public void Add(SlackChannel channel)
         {
-            var room = new Room { Id = channel.Id, Name = channel.Name };
+            var room = new Room(channel.Id, channel.Name);
             _dictionary.AddOrUpdate(channel.Id, room, (k, v) => room);
         }
 

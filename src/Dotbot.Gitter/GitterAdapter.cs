@@ -76,7 +76,7 @@ namespace Dotbot.Gitter
             }
         }
 
-        private void MessageReceived(User user, Room room, IBayeuxMessage raw)
+        private void MessageReceived(User bot, Room room, IBayeuxMessage raw)
         {
             // Get the Faya envelope object.
             var envelope = ((JObject)raw.Data).ToObject<Envelope<GitterMessage>>();
@@ -86,30 +86,18 @@ namespace Dotbot.Gitter
             }
 
             // From ourselves?
-            if (envelope.Model.FromUser?.Id == user.Id)
+            var from = envelope.Model.FromUser;
+            if (from?.Id == bot.Id)
             {
                 return;
             }
 
             // Create the message representation.
-            var message = new Message
-            {
-                Text = envelope.Model.Text,
-                User = new User
-                {
-                    Id = envelope.Model.FromUser?.Id,
-                    Username = envelope.Model.FromUser?.Username,
-                    DisplayName = envelope.Model.FromUser?.DisplayName
-                }
-            };
+            var fromUser = new User(from?.Id, from?.Username, from?.DisplayName);
+            var message = new Message(fromUser, envelope.Model.Text);
 
             // Enqueue the message.
-            _eventQueue.Enqueue(new MessageEvent(_broker)
-            {
-                Bot = user,
-                Room = room,
-                Message = message
-            });
+            _eventQueue.Enqueue(new MessageEvent(bot, room, message, _broker));
         }
     }
 }

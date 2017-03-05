@@ -33,14 +33,7 @@ namespace Dotbot.Gitter
         {
             var result = await Get<IEnumerable<GitterUser>>("https://api.gitter.im/v1/user").ConfigureAwait(false);
             var user = result.SingleOrDefault();
-            return user != null
-                ? new User()
-                {
-                    Id = user.Id,
-                    Username = user.Username,
-                    DisplayName = user.DisplayName
-                }
-                : null;
+            return user != null ? new User(user.Id, user.Username, user.DisplayName) : null;
         }
 
         public async Task Broadcast(Room room, string text)
@@ -51,7 +44,7 @@ namespace Dotbot.Gitter
 
         public async Task Reply(Room room, User fromUser, string text)
         {
-            var message = new Message { Text = $"@{fromUser.Username}: {text}" };
+            var message = new GitterMessage { Text = $"@{fromUser.Username}: {text}" };
             await Post($"https://api.gitter.im/v1/rooms/{room.Id}/chatMessages", message);
         }
 

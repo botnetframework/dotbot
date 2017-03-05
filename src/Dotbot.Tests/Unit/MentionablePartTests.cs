@@ -1,4 +1,5 @@
-﻿using Dotbot.Tests.Fakes;
+﻿using Dotbot.Models;
+using Dotbot.Tests.Fakes;
 using Dotbot.Tests.Fixtures;
 using Xunit;
 
@@ -13,8 +14,11 @@ namespace Dotbot.Tests.Unit
             {
                 // Given
                 var sut = new FakeMentionablePart();
-                var fixture = new ReplyContextFixture { Text = "@bot hello world!" };
-                fixture.Bot.Username = "bot";
+                var fixture = new ReplyContextFixture
+                {
+                    Text = "@bot hello world!",
+                    Bot = new User("1", "bot", "Botty McBotface")
+                };
 
                 // When
                 var result = sut.Handle(fixture.Create());
@@ -28,8 +32,11 @@ namespace Dotbot.Tests.Unit
             {
                 // Given
                 var sut = new FakeMentionablePart();
-                var fixture = new ReplyContextFixture { Text = "@bot hello world!" };
-                fixture.Bot.Username = "botty";
+                var fixture = new ReplyContextFixture
+                {
+                    Text = "@troll hello world!",
+                    Bot = new User("1", "bot", "Botty McBotface")
+                };
 
                 // When
                 var result = sut.Handle(fixture.Create());
@@ -46,8 +53,11 @@ namespace Dotbot.Tests.Unit
             {
                 // Given
                 var sut = new FakeMentionablePart();
-                var fixture = new ReplyContextFixture { Text = $"@{botName} hello world!" };
-                fixture.Bot.Username = botName;
+                var fixture = new ReplyContextFixture
+                {
+                    Text = $"@{botName} hello world!",
+                    Bot = new User("1", botName, "Botty McBotface")
+                };
 
                 // When
                 var result = sut.Handle(fixture.Create());

@@ -4,47 +4,28 @@ namespace Dotbot.Tests.Fixtures
 {
     public sealed class ReplyContextFixture
     {
-        public User Bot { get; }
+        public User Bot { get; set; }
 
-        public User Human { get; }
+        public User Human { get; set; }
 
-        public Room Room { get; }
+        public Room Room { get; set; }
 
         public string Text { get; set; }
 
-        public ReplyContextFixture(string botUsername = null, string botDisplayName = null,
-            string text = null)
+        public ReplyContextFixture(string text = null)
         {
-            Bot = new User
-            {
-                Id = "1",
-                Username = botUsername ?? "bot",
-                DisplayName = botDisplayName ?? "Botty McBotface"
-            };
+            Bot = new User("1", "bot", "Botty McBotface");
 
-            Human = new User
-            {
-                Id = "2",
-                Username = "human",
-                DisplayName = "Human McHumanface"
-            };
+            Human = new User("2", "human", "Human McHumanface");
 
-            Room = new Room
-            {
-                Id = "1",
-                Name = "room"
-            };
+            Room = new Room("1", "room");
 
             Text = text ?? "Hello World!";
         }
 
         public ReplyContext Create()
         {
-            return new ReplyContext(null, Bot, Room, new Message
-            {
-                Text = Text,
-                User = Human
-            });
+            return new ReplyContext(null, Bot, Room, new Message(Human, Text));
         }
     }
 }

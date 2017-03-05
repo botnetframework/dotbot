@@ -21,7 +21,7 @@ namespace Dotbot.Slack
             // Add channels
             foreach (var slackUser in handshake.Users)
             {
-                var user = new User { Id = slackUser.Id, DisplayName = slackUser.Profile.FirstName, Username = slackUser.Name };
+                var user = new User(slackUser.Id, slackUser.Profile.FirstName, slackUser.Name);
                 _dictionary.AddOrUpdate(slackUser.Id, user, (k, v) => user);
             }
         }
@@ -33,7 +33,7 @@ namespace Dotbot.Slack
 
         public void Add(SlackUser slackUser)
         {
-            var user = new User { Id = slackUser.Id, DisplayName = slackUser.Profile.FirstName, Username = slackUser.Name };
+            var user = new User(slackUser.Id, slackUser.Profile.FirstName, slackUser.Name);
             _dictionary.AddOrUpdate(slackUser.Id, user, (k, v) => user);
         }
     }
