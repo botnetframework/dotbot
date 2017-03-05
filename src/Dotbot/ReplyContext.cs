@@ -14,7 +14,7 @@ namespace Dotbot
 
         public void Reply(string message)
         {
-            Broker.Reply(Room, Message.User, message).Wait();
+            Broker.Reply(Room, Message.From, message).Wait();
         }
     }
 }

@@ -2,7 +2,13 @@
 {
     public sealed class Room
     {
-        public string Id { get; set; }
-        public string Name { get; set; }
+        public string Id { get; }
+        public string Name { get; }
+
+        public Room(string id, string name)
+        {
+            Id = id;
+            Name = name;
+        }
     }
 }

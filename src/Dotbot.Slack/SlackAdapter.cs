@@ -50,13 +50,8 @@ namespace Dotbot.Slack
             _users.Initialize(handshake);
 
             // Create an representation of ourself.
-            var bot = new User
-            {
-                Id = handshake.Self.Id,
-                Username = handshake.Self.Name,
-                DisplayName = handshake.Self.Profile?.RealName ?? handshake.Self.Name
-            };
-
+            var self = handshake.Self;
+            var bot = new User(self.Id, self.Name, handshake.Self.Profile?.RealName ?? handshake.Self.Name);
             _log.Information("Current user is {0}.", bot.Username);
 
             foreach (var channel in handshake.Channels.Where(x => x.IsChannel && x.Members != null))
@@ -163,12 +158,8 @@ namespace Dotbot.Slack
                 var text = handshake.Users.Aggregate(message.Text,
                     (m, u) => Regex.Replace(m, $"<@{u.Id}>", $"@{u.Name}"));
 
-                _eventQueue.Enqueue(new MessageEvent(_broker)
-                {
-                    Bot = bot,
-                    Message = new Message { Text = text, User = user },
-                    Room = room
-                });
+                // Enqueue the message.
+                _eventQueue.Enqueue(new MessageEvent(bot, room, new Message(user, text), _broker));
             }
             else if (message.SubType.Equals("channel_join", StringComparison.OrdinalIgnoreCase))
             {

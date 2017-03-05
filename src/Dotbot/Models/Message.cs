@@ -2,7 +2,13 @@
 {
     public sealed class Message
     {
-        public User User { get; set; }
-        public string Text { get; set; }
+        public User From { get; }
+        public string Text { get; }
+
+        public Message(User from, string text)
+        {
+            From = from;
+            Text = text;
+        }
     }
 }
