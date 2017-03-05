@@ -9,7 +9,7 @@ namespace Dotbot
 
         protected MentionablePart()
         {
-            _regex = new Regex("^(?<to>[a-z@\\d](?:[a-z\\d]|-(?=[a-z\\d])){0,38}) (?<message>.*)", RegexOptions.Compiled | RegexOptions.IgnoreCase);
+            _regex = new Regex("^(?<to>[a-z@\\d](?:[a-z\\d]|[-_#](?=[a-z\\d])){0,38}) (?<message>.*)", RegexOptions.Compiled | RegexOptions.IgnoreCase);
         }
 
         public sealed override bool Handle(ReplyContext context)
