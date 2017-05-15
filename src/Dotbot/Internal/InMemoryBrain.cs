@@ -1,6 +1,5 @@
 ﻿using System.Collections.Concurrent;
 using Dotbot.Diagnostics;
-using Newtonsoft.Json;
 
 namespace Dotbot.Internal
 {
@@ -32,8 +31,7 @@ namespace Dotbot.Internal
 
         public void Set(string key, string data)
         {
-            var json = JsonConvert.SerializeObject(data);
-            _data.AddOrUpdate(key, json, (k, v) => json);
+            _data.AddOrUpdate(key, data, (k, v) => data);
         }
     }
 }

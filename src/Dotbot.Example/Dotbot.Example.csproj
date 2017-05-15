@@ -13,7 +13,6 @@
   </PropertyGroup>
   <ItemGroup>
     <ProjectReference Include="..\Dotbot\Dotbot.csproj" />
-    <ProjectReference Include="..\Dotbot.Gitter\Dotbot.Gitter.csproj" />
     <ProjectReference Include="..\Dotbot.Slack\Dotbot.Slack.csproj" />
   </ItemGroup>
   <ItemGroup>

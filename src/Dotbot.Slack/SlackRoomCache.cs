@@ -1,4 +1,5 @@
-﻿using System.Collections.Concurrent;
+﻿using System;
+using System.Collections.Concurrent;
 using Dotbot.Models;
 using Dotbot.Slack.Models;
 
@@ -10,7 +11,7 @@ namespace Dotbot.Slack
 
         public SlackRoomCache()
         {
-            _dictionary = new ConcurrentDictionary<string, Room>();
+            _dictionary = new ConcurrentDictionary<string, Room>(StringComparer.OrdinalIgnoreCase);
         }
 
         public void Initialize(SlackHandshake handshake)
@@ -22,16 +23,14 @@ namespace Dotbot.Slack
             foreach (var channel in handshake.Channels)
             {
                 var room = new Room(channel.Id, channel.Name);
-                _dictionary.AddOrUpdate(channel.Id, room, (k, v) =>
-                    new Room(k, v.Name));
+                _dictionary.AddOrUpdate(channel.Id, room, (k, v) => new Room(k, v.Name));
             }
 
             // Add groups
             foreach (var group in handshake.Groups)
             {
                 var room = new Room(group.Id, group.Name);
-                _dictionary.AddOrUpdate(group.Id, room, (k, v) =>
-                    new Room(k, v.Name));
+                _dictionary.AddOrUpdate(group.Id, room, (k, v) => new Room(k, v.Name));
             }
         }
 
@@ -41,7 +40,7 @@ namespace Dotbot.Slack
             _dictionary.AddOrUpdate(channel.Id, room, (k, v) => room);
         }
 
-        public Room Get(string id)
+        public Room GetById(string id)
         {
             return _dictionary.TryGetValue(id, out Room room) ? room : null;
         }

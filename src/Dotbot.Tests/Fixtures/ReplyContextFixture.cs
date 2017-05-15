@@ -25,7 +25,7 @@ namespace Dotbot.Tests.Fixtures
 
         public ReplyContext Create()
         {
-            return new ReplyContext(null, Bot, Room, new Message(Human, Text));
+            return new ReplyContext(null, Bot, Room, new Message(Human, null, Text));
         }
     }
 }
