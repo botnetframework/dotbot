@@ -1,6 +1,5 @@
-﻿using Dotbot.Models;
-using Dotbot.Tests.Fakes;
-using Dotbot.Tests.Fixtures;
+﻿using Dotbot.Tests.Fixtures;
+using Dotbot.Tests.Stubs;
 using Xunit;
 
 namespace Dotbot.Tests.Unit
@@ -10,60 +9,39 @@ namespace Dotbot.Tests.Unit
         public sealed class TheHandleMentionMethod
         {
             [Fact]
-            public void Should_Handle_Mention_For_Correctly_Formatted_Message()
+            public void Should_Handle_Mention_If_Meant_For_Bot()
             {
                 // Given
-                var sut = new FakeMentionablePart();
-                var fixture = new ReplyContextFixture
-                {
-                    Text = "@bot hello world!",
-                    Bot = new User("1", "bot", "Botty McBotface")
-                };
+                var sut = new MentionablePartStub();
+
+                var fixture = new ReplyContextFixture();
+                var context = fixture.Create(
+                    from: fixture.Human, 
+                    to: fixture.Bot);
 
                 // When
-                var result = sut.Handle(fixture.Create());
+                var result = sut.Handle(context);
 
                 // Then
                 Assert.True(result);
             }
 
             [Fact]
-            public void Should_Not_Handle_Mention_For_Other_Users()
+            public void Should_Not_Handle_Mention_If_Not_Meant_For_Bot()
             {
                 // Given
-                var sut = new FakeMentionablePart();
-                var fixture = new ReplyContextFixture
-                {
-                    Text = "@troll hello world!",
-                    Bot = new User("1", "bot", "Botty McBotface")
-                };
+                var sut = new MentionablePartStub();
+
+                var fixture = new ReplyContextFixture();
+                var context = fixture.Create(
+                    from: fixture.Bot,
+                    to: fixture.Human);
 
                 // When
-                var result = sut.Handle(fixture.Create());
+                var result = sut.Handle(context);
 
                 // Then
                 Assert.False(result);
-            }
-
-            [Theory]
-            [InlineData("bot_user")]
-            [InlineData("bot-user")]
-            [InlineData("botuser#01")]
-            public void Should_Handle_Mention_For_Usernames_With_Special_Characters(string botName)
-            {
-                // Given
-                var sut = new FakeMentionablePart();
-                var fixture = new ReplyContextFixture
-                {
-                    Text = $"@{botName} hello world!",
-                    Bot = new User("1", botName, "Botty McBotface")
-                };
-
-                // When
-                var result = sut.Handle(fixture.Create());
-
-                // Then
-                Assert.True(result);
             }
         }
     }

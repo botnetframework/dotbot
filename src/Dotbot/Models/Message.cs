@@ -8,10 +8,10 @@
 
         public string Text { get; }
 
-        public Message(User from, User recipient, string text)
+        public Message(User from, User to, string text)
         {
             From = from;
-            Recipient = recipient;
+            Recipient = to;
             Text = text;
         }
     }
