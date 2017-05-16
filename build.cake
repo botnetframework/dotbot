@@ -6,7 +6,7 @@ var config = Argument<string>("configuration", "Release");
 
 var version = new BuildVersion("0.1.0", "local");
 var projects = new DirectoryPath[] {
-    "./src/Dotbot", "./src/Dotbot.Slack", "./src/Dotbot.Gitter"
+    "./src/Dotbot", "./src/Dotbot.Slack"
 };
 
 var isRunningOnAppVeyor = BuildSystem.AppVeyor.IsRunningOnAppVeyor;

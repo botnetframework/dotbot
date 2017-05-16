@@ -16,6 +16,8 @@ src/CakeTron/brain
 *.user
 *.userosscache
 *.sln.docstates
+*.ncrunchproject
+*.ncrunchsolution
 
 # User-specific files (MonoDevelop/Xamarin Studio)
 *.userprefs

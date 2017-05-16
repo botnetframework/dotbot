@@ -32,10 +32,11 @@ namespace Dotbot
                 {
                     var argsGroup = match.Groups["args"] != null ? match.Groups["args"].ToString() : string.Empty;
                     var args = argsGroup.Split(new[] { ' ' }, StringSplitOptions.RemoveEmptyEntries);
+
                     HandleCommand(context, args);
+
                     return true;
                 }
-
             }
             return false;
         }

@@ -1,6 +1,8 @@
-﻿namespace Dotbot.Models
+﻿using System;
+
+namespace Dotbot.Models
 {
-    public sealed class User
+    public sealed class User : IEquatable<User>
     {
         public string Id { get; }
 
@@ -13,6 +15,11 @@
             Id = id;
             Username = userName;
             DisplayName = displayName;
+        }
+
+        public bool Equals(User other)
+        {
+            return other != null && Id.Equals(other.Id, StringComparison.Ordinal);
         }
     }
 }

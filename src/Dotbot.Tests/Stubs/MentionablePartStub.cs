@@ -1,6 +1,6 @@
-﻿namespace Dotbot.Tests.Fakes
+﻿namespace Dotbot.Tests.Stubs
 {
-    public sealed class FakeMentionablePart : MentionablePart
+    public sealed class MentionablePartStub : MentionablePart
     {
         protected override bool HandleMention(ReplyContext context, string message)
         {

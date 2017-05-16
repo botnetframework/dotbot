@@ -20,6 +20,9 @@ namespace Dotbot.Slack
             builder.Services.AddSingleton<IAdapter>(s => s.GetService<SlackAdapter>());
             builder.Services.AddSingleton<IWorker>(s => s.GetService<SlackAdapter>());
 
+            // Engine
+            builder.Services.AddSingleton<SlackEngine>();
+
             // Broker
             builder.Services.AddSingleton<SlackBroker>();
             builder.Services.AddSingleton<IBroker>(s => s.GetService<SlackBroker>());

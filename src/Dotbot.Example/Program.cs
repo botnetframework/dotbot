@@ -1,7 +1,6 @@
 ﻿using System;
 using System.IO;
 using Dotbot.Example.Parts;
-using Dotbot.Gitter;
 using Dotbot.Slack;
 using Microsoft.Extensions.Configuration;
 
@@ -16,7 +15,6 @@ namespace Dotbot.Example
 
             // Build the robot.
             var robot = new RobotBuilder()
-                .UseGitter(configuration["Gitter:Token"])
                 .UseSlack(configuration["Slack:Token"])
                 .AddPart<PingPart>()
                 .Build();
