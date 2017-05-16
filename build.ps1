@@ -32,8 +32,7 @@ Param(
 )
 
 $CakeVersion = "0.17.0"
-$DotNetRelease = "1.0.0"
-$DotNetVersion = "1.0.0-rc4-004771"
+$DotNetVersion = "1.0.4"
 $NugetUrl = "https://dist.nuget.org/win-x86-commandline/latest/nuget.exe"
 
 # Make sure tools folder exists
@@ -62,6 +61,7 @@ if (Get-Command dotnet -ErrorAction SilentlyContinue)
     $FoundDotNetCliVersion = dotnet --version;
 }
 
+# Is the version we want installed?
 if($FoundDotNetCliVersion -ne $DotNetVersion) 
 {
     $InstallPath = Join-Path $PSScriptRoot ".dotnet"
@@ -69,7 +69,7 @@ if($FoundDotNetCliVersion -ne $DotNetVersion)
         mkdir -Force $InstallPath | Out-Null;
     }
 
-    $DotNetInstallerUri = "https://raw.githubusercontent.com/dotnet/cli/rel/$DotNetRelease/scripts/obtain/dotnet-install.ps1";
+    $DotNetInstallerUri = "https://raw.githubusercontent.com/dotnet/cli/rel/1.0.0/scripts/obtain/dotnet-install.ps1";
     (New-Object System.Net.WebClient).DownloadFile($DotNetInstallerUri, "$InstallPath\dotnet-install.ps1");
     & $InstallPath\dotnet-install.ps1 -Channel "preview" -Version $DotNetVersion -InstallDir $InstallPath;
 
@@ -78,8 +78,10 @@ if($FoundDotNetCliVersion -ne $DotNetVersion)
 
     $env:PATH = "$InstallPath;$env:PATH"
     $env:DOTNET_SKIP_FIRST_TIME_EXPERIENCE=1
-    $env:DOTNET_CLI_TELEMETRY_OPTOUT=1
 }
+
+# Opt out from telemetry.
+$env:DOTNET_CLI_TELEMETRY_OPTOUT=1
 
 ###########################################################################
 # INSTALL NUGET
