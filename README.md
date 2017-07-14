@@ -6,13 +6,12 @@ Dotbot is an extensible bot framework built using .NET Core.
 
 ### 1. Add the bot entry point
 
-Create a new .NET Core console application and reference `Dotbot.Slack` and/or `Dotbot.Gitter`.  
+Create a new .NET Core console application and reference `Dotbot.Slack`.
 Add this code in your `Program.cs` and press F5.
 
 ```csharp
 using System;
 using Dotbot;
-using Dotbot.Gitter;
 using Dotbot.Slack;
 
 namespace Dotbot.Example
@@ -23,7 +22,6 @@ namespace Dotbot.Example
         {
             // Build the robot.
             var robot = new RobotBuilder()
-                .UseGitter("MY_GITTER_TOKEN")
                 .UseSlack("MY_SLACK_TOKEN")
                 .Build();
 
@@ -78,7 +76,6 @@ Locate your `RobotBuilder` in `Program.cs` and add `.AddPart<PingPart>()` to it.
 ```csharp
     // Build the robot.
     var robot = new RobotBuilder()
-        .UseGitter("MY_GITTER_TOKEN")
         .UseSlack("MY_SLACK_TOKEN")
         .AddPart<PingPart>() // The new line
         .Build();
@@ -86,7 +83,7 @@ Locate your `RobotBuilder` in `Program.cs` and add `.AddPart<PingPart>()` to it.
 
 ## 3. Try it out
 
-Invite the bot into a Gitter or Slack channel and try it out.
+Invite the bot into Slack channel and try it out.
 
 ```
 [patrik]
